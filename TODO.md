@@ -7,4 +7,4 @@ TODO List
 * Enable to close the bubble
 * Find a test framework that suits the plugin dev (qunit?)
 * <del>Add a build script to minimify the the source and run the tests</del>
-* Add package.json
+* <del>Add package.json</del>
