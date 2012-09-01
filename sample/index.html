@@ -1,29 +1,27 @@
+<!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
 		<title>jQuery Info Bubble plugin</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-		<script type="text/javascript" src="../jquery.infobubble.min.js"></script>
+		<script type="text/javascript" src="../src/jquery.infobubble.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$('#test').infoBubble();
+				$('#target').infoBubble({content: 'On top of the target', position: 'top'});
+				$('#target').infoBubble({content: 'Bellow the target', position: 'bottom'});
+				$('#target').infoBubble({content: 'On the left of the target', position: 'left'});
+				$('#target').infoBubble({content: 'On the right of the target', position: 'right'});
 			});
 		</script>
 		<style>
-			body{ color:#333; }
-			h1 {text-align:center; }
-			#test{
-				width:60%;
-				margin:150px auto;
-				border: solid 1px #888;
-				border-radius:3px;
-				padding: 3px;
-				text-align:justify;
-			}
+			body { background-color:#eee; color:#333; }
+			h1 { text-align:center; }
+			#target { width:60%; margin:150px auto; border: solid 1px #888; border-radius:3px; padding: 6px; text-align:justify; background-color:#fff; }
 		</style>
 	</head>
 	<body>
 		<h1>jQuery Info Bubble plugin</h1>
-		<div id="test">
+		<div id="target">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae metus leo. Nunc arcu elit, vulputate a consectetur vel, consectetur a nisi. Donec interdum interdum leo in porttitor. Aenean mauris turpis, molestie vel hendrerit sed, molestie et velit. Maecenas ornare metus id sem congue suscipit. In vitae dolor tellus. Pellentesque vel ante ut justo bibendum semper in id ipsum. Cras lectus massa, iaculis in tempor ac, condimentum at erat. Nullam facilisis imperdiet justo ac commodo. Sed in est nec nibh pellentesque cursus. Vivamus rutrum pulvinar pellentesque. Ut leo est, porta eleifend mattis at, hendrerit ut mi.</p>
 			<p>Vestibulum at auctor odio. Etiam felis ligula, vehicula sed porttitor in, consequat ut urna. Mauris lorem quam, consectetur ut varius eu, adipiscing et erat. Sed blandit arcu sit amet sem rhoncus eu eleifend nulla porttitor. Suspendisse at eros ante, et aliquam urna. Aliquam at diam eu enim rutrum sodales. Sed ullamcorper leo eget eros tincidunt dapibus.</p>
 			<p>Quisque hendrerit, urna posuere tempor consequat, risus enim laoreet tortor, sed tincidunt elit metus quis est. Fusce fringilla auctor felis eget feugiat. Vivamus pellentesque scelerisque blandit. Praesent vitae ligula justo. Quisque at est arcu, nec interdum leo. Mauris placerat neque ut quam tincidunt nec aliquet massa dapibus. Mauris iaculis pharetra augue vehicula ornare. Ut eget orci a magna accumsan imperdiet at a purus. In risus est, lacinia at accumsan et, tempus eget justo.</p>

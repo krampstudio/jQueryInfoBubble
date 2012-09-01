@@ -46,31 +46,41 @@
             var opts = $.extend(true, {}, InfoBubble._opts, options);
             return this.each(function() {
                 var $elt = $(this);
-				var target = $.extend({}, $elt.offset(), {
-					width	: parseInt($elt.width()),
-					height	: parseInt($elt.height()),
-					right	: parseInt($elt.offset().left) + parseInt($elt.width()),
-					bottom	: parseInt($elt.offset().top) + parseInt($elt.height())
-				});
+				var target = {
+					width	: $elt.outerWidth(),
+					height	: $elt.outerHeight(),
+					top		: parseInt($elt.offset().top),
+					left	: parseInt($elt.offset().left),
+					right	: parseInt($elt.offset().left) + $elt.outerWidth(),
+					bottom	: parseInt($elt.offset().top) + $elt.outerHeight()
+				};
 
-				var arrow, position = {};
+				var arrow = {}, 
+					position = {};
 				switch(opts.position) {
-					case 'top'		: arrow = opts.arrow.bottom;  break;
-					case 'right'	: arrow = opts.arrow.left; break;
-					case 'bottom'	: arrow = opts.arrow.top; break;
-					case 'left'		: arrow = opts.arrow.right; break;
+					case 'top'		: arrow.src = opts.arrow.bottom; break;
+					case 'right'	: arrow.src = opts.arrow.left; break;
+					case 'bottom'	: arrow.src = opts.arrow.top; break;
+					case 'left'		: arrow.src = opts.arrow.right; break;
 					default			: $.error('Unkown position ' + opts.position + 'for the info bubble'); break;
 				}
 				
 				//load the arrow to get it's size
-				InfoBubble.getImageSize(arrow, function(error, size){
+				InfoBubble.getImageSize(arrow.src, function(error, size){
 				
 					if(error){
 						return $.error(error);
 					}
+					$.extend(arrow, {
+						pos : {
+							width	: parseInt(size.width),
+							height	: parseInt(size.height)
+						}
+					});
+
 					var $bubble = $("<div>"
 								+ "	<div class='bubble-container'>"
-								+ " 	<img class='bubble-arrow' src='"+arrow+"' />"
+								+ " 	<img class='bubble-arrow' src='"+arrow.src+"' />"
 								+ "		<div class='bubble-content'></div>"
 								+ " </div>"
 								+ "</div>");
@@ -79,28 +89,63 @@
 											.css(opts.style);
 					$bubble.css({
 								'position' 	: 'absolute',
-								'top'		: '200px',
-								'left'		: '200px',
-								'z-index'	: '1000'
-							 })	
-					$('.bubble-container', $bubble).css({'position' : 'relative'});
-					$('.bubble-arrow', $bubble).css({
-								'position' 	: 'absolute',
-								'top'		: '15px',
-								'left'		: '0',
-								'opacity'	: '0.7',
-								'z-index'	: '1500'
-							});
-					$('.bubble-content',$bubble).css({
-                                'position' 	: 'absolute',
-								'top'		: '0',
-								'left'		: (parseInt(size.width) - 2) + 'px',
-								'opacity'	: '0.6',
 								'z-index'	: '1000',
-								'min-width'	: '200px',
-								'min-height': '100px'
+								'visibility': 'hidden'
+							 });
+					$('.bubble-container', $bubble).css({'position' : 'relative'});
+                    $('.bubble-arrow', $bubble).css({
+                                'position'  : 'absolute',
+                                'opacity'   : '0.7',
+                                'z-index'   : '1500'
                             });
+                    $('.bubble-content',$bubble).css({
+                                'position'  : 'absolute',
+                                'top'       : '0',
+                                'left'      : (parseInt(size.width) - 2) + 'px',
+                                'opacity'   : '0.6',
+                                'z-index'   : '1000',
+                                'min-width' : ((parseInt(size.width) * 2) + 5) +'px',
+                                'min-height': ((parseInt(size.height) * 2) + 5) +'px'
+                            });
+					//add it first invisible to calculate the content size
 					$('body').append($bubble);
+
+					var arrowHLag = (($('.bubble-content',$bubble).outerHeight() - $('.bubble-content',$bubble).innerHeight())/2),
+						arrowVLag = (($('.bubble-content',$bubble).outerWidth() - $('.bubble-content',$bubble).innerWidth())/2) 
+					switch(opts.position) {
+                   		case 'top'      :
+                        	arrow.pos.top = $('.bubble-content',$bubble).outerHeight() - arrowHLag;
+							arrow.pos.left = ($('.bubble-content',$bubble).outerWidth() + arrow.pos.width) / 2;
+                        	position.top = target.top - $('.bubble-content',$bubble).outerHeight() - arrow.pos.height;
+                       		position.left = target.left + (target.width / 2) - $('.bubble-content',$bubble).outerWidth();
+                        	break;
+                    	case 'right'    : 
+							arrow.pos.top = ($('.bubble-content',$bubble).outerHeight() - arrow.pos.height) / 2;
+                            arrow.pos.left = 0;
+                            position.top = target.top + (target.height / 2 );
+                            position.left = target.right;
+							break;
+                    	case 'bottom'   : 
+							arrow.pos.top = arrowHLag - arrow.pos.height;
+                            arrow.pos.left = ($('.bubble-content',$bubble).outerWidth() + arrow.pos.width) / 2;
+                            position.top = target.bottom + arrow.pos.height;
+                            position.left = target.left + (target.width / 2) - $('.bubble-content',$bubble).outerWidth();
+							break;
+                    	case 'left'     : 
+							arrow.pos.top = ($('.bubble-content',$bubble).outerHeight() - arrow.pos.height) / 2;
+                            arrow.pos.left = $('.bubble-content',$bubble).innerWidth() + arrow.pos.width;
+                            position.top = target.top + (target.height / 2 );
+                            position.left = target.left - $('.bubble-content',$bubble).outerWidth() - arrow.pos.width - arrowHLag;
+							break;
+                	}
+					var card;
+					for(card in position){
+						$bubble.css(card, position[card] + 'px');
+					}
+					for(card in arrow.pos){
+						$('.bubble-arrow', $bubble).css(card, arrow.pos[card] + 'px');
+					}
+					$bubble.css('visibility', 'visible');
 				});
 			});
         },
