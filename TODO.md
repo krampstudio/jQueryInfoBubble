@@ -5,5 +5,6 @@ TODO List
 * <del>Set up to the right position</del>
 * Use a sprite instead of 4 images for arrows
 * Enable to close the bubble
-* Find a test framework that suits the plugin dev
+* Find a test framework that suits the plugin dev (qunit?)
 * Add a build script to minimify the the source and run the tests (jake?)
+* Add package.json
