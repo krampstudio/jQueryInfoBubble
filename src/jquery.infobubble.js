@@ -27,7 +27,9 @@
     var InfoBubble = {
         _opts : {
 			content : 'info bubble',							//the content of the bubble, can be html
+			display	: true,
 			position: 'right',									//the position of the bubble relative to the jquery element
+			opacity : 0.6,
 			arrow	: {											//the src of imgs used for the arrow
 				top		: '../resources/arrow_top.png',
 				right	: '../resources/arrow_right.png',
@@ -42,7 +44,8 @@
 				'border-radius'		: '6px'
 			}
         },
-        display: function(options){      
+		bubble : null,
+        init: function(options){      
             var opts = $.extend(true, {}, InfoBubble._opts, options);
             return this.each(function() {
                 var $elt = $(this);
@@ -95,14 +98,14 @@
 					$('.bubble-container', $bubble).css({'position' : 'relative'});
                     $('.bubble-arrow', $bubble).css({
                                 'position'  : 'absolute',
-                                'opacity'   : '0.7',
+                                'opacity'   :  opts.opacity + 0.1,
                                 'z-index'   : '1500'
                             });
                     $('.bubble-content',$bubble).css({
                                 'position'  : 'absolute',
                                 'top'       : '0',
                                 'left'      : (parseInt(size.width) - 2) + 'px',
-                                'opacity'   : '0.6',
+                                'opacity'   : opts.opacity,
                                 'z-index'   : '1000',
                                 'min-width' : ((parseInt(size.width) * 2) + 5) +'px',
                                 'min-height': ((parseInt(size.height) * 2) + 5) +'px'
@@ -145,13 +148,42 @@
 					for(card in arrow.pos){
 						$('.bubble-arrow', $bubble).css(card, arrow.pos[card] + 'px');
 					}
-					$bubble.css('visibility', 'visible');
+					$bubble.css({
+							'display': 'none',
+							'visibility' : 'visible' 
+							});
+
+					//bind the bubble reference to the target
+					$elt.data('infobubble', $bubble);
+
+					if(opts.display){
+						$elt.infoBubble('display');
+					}
 				});
 			});
         },
+		display : function(){
+			this.each(function() {
+                var $elt = $(this);
+                if($elt.data('infobubble')){
+                    $elt.data('infobubble').show();
+                }
+            });
+		},
+		close : function(){
+			this.each(function() {
+                var $elt = $(this);
+                if($elt.data('infobubble')){
+                    $elt.data('infobubble').hide();
+                }
+            });
+		},
         destroy : function(){
             this.each(function() {
             	var $elt = $(this);
+				if($elt.data('infobubble')){
+					$elt.data('infobubble').remove();
+				}
 			});
         }
     };
@@ -175,7 +207,7 @@
         if ( InfoBubble[method] ) {
           return InfoBubble[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof method === 'object' || ! method ) {
-          return InfoBubble.display.apply( this, arguments );
+          return InfoBubble.init.apply( this, arguments );
         } else {
           $.error( 'Method ' +  method + ' does not exist on jQuery.infoBubble' );
         }
