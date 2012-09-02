@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="utf-8">
+	<title>QUnit basic example</title>
+  	<link rel="stylesheet" href="qunit/qunit.css">
+	<script src="qunit/qunit.js"></script>
+	<script>
+	(function() {
+		var jquerySrc = "../lib/jquery.js",
+			infoBubbleSrc = "../src/jquery.infobubble.js";
+		QUnit.config.urlConfig.push( "min" );
+		if ( QUnit.urlParams.min ) {
+			jquerySrc = "../lib/jquery.min.js";
+			infoBubbleSrc = "../jquery.infobubble.min.js"
+		}
+		document.write( "<script src='" + jquerySrc + "'><\/script>" );
+		document.write( "<script src='" + infoBubbleSrc + "'><\/script>" );
+	 })();
+	</script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="qunit/qunit.js"></script>
+  <script>
+    test("jQuery checks", function() {
+		ok( (typeof jQuery != 'undefined'), "We expect jQuery to be available");
+		ok( (typeof $ == 'function'), "We expect the jQuery alias `$` is available"); 
+		ok( (typeof jQuery().jquery == 'string'), "We expect to be able to get the jQuery version");
+    	equal(jQuery().jquery, "1.8.0", "We expect the jQuery version is 1.8.0");
+	});
+	test("infoBubble plugin check", function(){
+		
+		ok( (typeof $.fn.infoBubble == 'function'), "We expect the infoBubble plugin is available");
+	});
+  </script>
+</body>
+</html>
