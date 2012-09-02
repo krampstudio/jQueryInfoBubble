@@ -21,9 +21,12 @@
 </head>
 <body>
   <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
-  <script src="qunit/qunit.js"></script>
+  <div id="qunit-fixture">
+		<div id="target1">test</div>
+		<div id="target2">test <a href='#'>link1</a> and test <a href='#'>link2</a></div>
+  </div>
   <script>
+	module("presence checks");
     test("jQuery checks", function() {
 		ok( (typeof jQuery != 'undefined'), "We expect jQuery to be available");
 		ok( (typeof $ == 'function'), "We expect the jQuery alias `$` is available"); 
@@ -31,7 +34,6 @@
     	equal(jQuery().jquery, "1.8.0", "We expect the jQuery version is 1.8.0");
 	});
 	test("infoBubble plugin check", function(){
-		
 		ok( (typeof $.fn.infoBubble == 'function'), "We expect the infoBubble plugin is available");
 	});
   </script>
