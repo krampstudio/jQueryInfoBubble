@@ -1,7 +1,7 @@
 TODO List
 =========
 
-* use $.fn.infoBubble plugin type instead of the InfoBubble object
+* <del>use $.fn.infoBubble plugin type instead of the InfoBubble object</del>
 * <del>Set up to the right position</del>
 * Use a sprite instead of 4 images for arrows
 * Enable to close the bubble

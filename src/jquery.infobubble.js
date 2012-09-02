@@ -172,7 +172,13 @@
 	};
 
     $.fn.infoBubble = function( method ) {        
-        return InfoBubble.display.apply( this, arguments );
+        if ( InfoBubble[method] ) {
+          return InfoBubble[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === 'object' || ! method ) {
+          return InfoBubble.display.apply( this, arguments );
+        } else {
+          $.error( 'Method ' +  method + ' does not exist on jQuery.infoBubble' );
+        }
     };
 
 })( jQuery );
