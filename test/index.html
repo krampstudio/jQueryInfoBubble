@@ -43,15 +43,14 @@
 		var $target = $('#target1', $('#qunit-fixture')),
 			content = 'test target1';
 		$target.infoBubble({content: content, position: 'top'});
-		//TODO refactor once the plugin send events
-		setTimeout(function(){
+		$target.bind('infobubbledisplay', function(){
 			ok( $target.length == 1, "We expect to found the target using jQuery selector");
 			
 			var $bubble = $('div.bubble-container');
 			ok( $bubble.length == 1, "We expect the html container is inserted");
 			equal( $('.bubble-content', $bubble).text(), content, "We expect the bubble content is inserted");
 			start();
-		}, 2000);
+		});
 	});
   </script>
 </body>

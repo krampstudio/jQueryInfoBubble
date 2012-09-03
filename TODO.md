@@ -8,4 +8,7 @@ TODO List
 * Find a test framework that suits the plugin dev (qunit?)
 * <del>Add a build script to minimify the the source and run the tests</del>
 * <del>Add package.json</del>
-* Send events (init, load, display, close and destroy)
+* <del>Send events (init, load, display, close and destroy)</del>
+* Correct and refactor the positionning algo 
+* Enable to theme the bubbles in harmony with the jquery ui themes
+* Change the defaults arrow images

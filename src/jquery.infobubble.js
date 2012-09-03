@@ -45,7 +45,7 @@
 			}
         },
 		bubble : null,
-        init: function(options){      
+        init: function(options){
             var opts = $.extend(true, {}, InfoBubble._opts, options);
             return this.each(function() {
                 var $elt = $(this);
@@ -155,6 +155,8 @@
 
 					//bind the bubble reference to the target
 					$elt.data('infobubble', $bubble);
+					//trigger the event `infobubblecreate` 
+					$elt.trigger('infobubblecreate', $bubble);					
 
 					if(opts.display){
 						$elt.infoBubble('display');
@@ -166,7 +168,11 @@
 			this.each(function() {
                 var $elt = $(this);
                 if($elt.data('infobubble')){
-                    $elt.data('infobubble').show();
+                    var $bubble = $elt.data('infobubble');
+					$bubble.show('slow', function(){
+						//trigger the `infobubbledisplay` event 
+						$elt.trigger('infobubbledisplay', $bubble);
+					});
                 }
             });
 		},
@@ -174,7 +180,11 @@
 			this.each(function() {
                 var $elt = $(this);
                 if($elt.data('infobubble')){
-                    $elt.data('infobubble').hide();
+					var $bubble = $elt.data('infobubble');
+                    $bubble.hide('slow', function(){
+                        //trigger the `infobubbleclose` event 
+                        $elt.trigger('infobubbleclose', $bubble);
+                    });
                 }
             });
 		},
@@ -182,7 +192,10 @@
             this.each(function() {
             	var $elt = $(this);
 				if($elt.data('infobubble')){
-					$elt.data('infobubble').remove();
+					var $bubble = $elt.data('infobubble');
+					//trigger the `infobubbleclose` event 
+                    $elt.trigger('infobubbledestroy', $bubble);
+					$bubble.remove();
 				}
 			});
         }

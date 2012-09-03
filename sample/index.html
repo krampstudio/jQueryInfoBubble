@@ -11,6 +11,7 @@
 				$('#target').infoBubble({content: 'Fixed bubble bellow the target', position: 'bottom'});
 				$('#target').infoBubble({content: 'Fixed bubble left to the target', position: 'left'});
 				$('#target').infoBubble({content: 'Fixed bubble on the right of the target', position: 'right'});
+		
 				$('#target a').infoBubble({content: 'Contextual help bubble', display: false, position: 'top', style : {'width': '150px', height: '25px'} });
 				$('#target a').mouseover(function(){
 					$(this).infoBubble('display');
@@ -20,18 +21,36 @@
                     $(this).infoBubble('close');
                     return false;
                 });
+				
+				$('#target span').infoBubble({
+					content: 'Special bubble', 
+					display: false, 
+					position: 'bottom', 
+					opacity: 0.8,
+					style : {'width': '250px', height: '50px', color: 'red'} 
+				});
+				$('#target span').click(function(){
+					$(this).infoBubble('display');
+                    return false;
+				});
+				$('#target span').bind('infobubbledisplay', function(event, bubble){
+					$('.bubble-content', bubble).text($('.bubble-content', bubble).text() + ' with dynamic content');
+					return false;
+				});
 			});
 		</script>
 		<style>
 			body { background-color:#999; color:#333; }
 			h1 { text-align:center; }
 			#target { width:60%; margin:150px auto; border: solid 1px #888; border-radius:3px; padding: 6px; text-align:justify; background-color:#fff; }
+			#target span{ color:#F23E3E;text-decoration:underline; cursor:pointer; }
+			#target span:hover{ text-decoration:none; }
 		</style>
 	</head>
 	<body>
 		<h1>jQuery Info Bubble plugin</h1>
 		<div id="target">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae metus leo. Nunc arcu elit, vulputate a consectetur vel, consectetur a nisi. Donec interdum interdum leo in porttitor. Aenean mauris turpis, molestie vel hendrerit sed, molestie et velit. Maecenas ornare metus id sem congue suscipit. In vitae dolor tellus. Pellentesque vel ante ut justo bibendum semper in id ipsum. Cras lectus massa, iaculis in tempor ac, condimentum at erat. Nullam facilisis imperdiet justo ac commodo. Sed in est nec nibh pellentesque cursus. Vivamus rutrum pulvinar pellentesque. Ut leo est, porta eleifend mattis at, hendrerit ut mi.</p>
+			<p><span>Lorem ipsum dolor sit amet</span>, consectetur adipiscing elit. Aliquam vitae metus leo. Nunc arcu elit, vulputate a consectetur vel, consectetur a nisi. Donec interdum interdum leo in porttitor. Aenean mauris turpis, molestie vel hendrerit sed, molestie et velit. Maecenas ornare metus id sem congue suscipit. In vitae dolor tellus. Pellentesque vel ante ut justo bibendum semper in id ipsum. Cras lectus massa, iaculis in tempor ac, condimentum at erat. Nullam facilisis imperdiet justo ac commodo. Sed in est nec nibh pellentesque cursus. Vivamus rutrum pulvinar pellentesque. Ut leo est, porta eleifend mattis at, hendrerit ut mi.</p>
 			<p><a href='#'>Vestibulum at auctor odio.</a> Etiam felis ligula, vehicula sed porttitor in, consequat ut urna. Mauris lorem quam, consectetur ut varius eu, adipiscing et erat. Sed blandit arcu sit amet sem rhoncus eu eleifend nulla porttitor. Suspendisse at eros ante, et aliquam urna. Aliquam at diam eu enim rutrum sodales. Sed ullamcorper leo eget eros tincidunt dapibus.</p>
 			<p><a href='#'>Quisque hendrerit</a>, urna posuere tempor consequat, risus enim laoreet tortor, sed tincidunt elit metus quis est. Fusce fringilla auctor felis eget feugiat. Vivamus pellentesque scelerisque blandit. Praesent vitae ligula justo. Quisque at est arcu, nec interdum leo. Mauris placerat neque ut quam tincidunt nec aliquet massa dapibus. Mauris iaculis pharetra augue vehicula ornare. Ut eget orci a magna accumsan imperdiet at a purus. In risus est, lacinia at accumsan et, tempus eget justo.</p>
 			<p>Nunc sed ligula massa. In mi nulla, commodo ut egestas eget, congue id nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque eget ante odio. Curabitur eget lacus velit, at facilisis tellus. Donec sollicitudin convallis euismod. Aliquam nibh mi, scelerisque eu adipiscing non, pellentesque a sem. Pellentesque ultrices mollis dui et sollicitudin. Fusce porta blandit eleifend. Mauris egestas consectetur sapien sed pretium.</p>
