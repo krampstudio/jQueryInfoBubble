@@ -8,3 +8,4 @@ TODO List
 * Find a test framework that suits the plugin dev (qunit?)
 * <del>Add a build script to minimify the the source and run the tests</del>
 * <del>Add package.json</del>
+* Send events (init, load, display, close and destroy)
