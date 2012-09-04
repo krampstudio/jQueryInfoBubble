@@ -19,6 +19,9 @@ module.exports = function(grunt){
 				src : [ '<banner>', 'jquery.infobubble.min.js'],
 				dest: 'jquery.infobubble.min.js'
 			}
+		},
+		qunit : {
+			all : ['test/*.html']
 		}
 	});
 };
