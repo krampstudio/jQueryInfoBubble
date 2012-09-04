@@ -51,6 +51,20 @@ Initialisation options:
 
 `$('#target').infoBubble('destroy');`
 
+## Events ##
+
+* **infobubblecreate**: triggered when the bubble elements are inserted to the dom.
+* **infobubbledisplay**: triggered each time the bubble is shown.
+* **infobubbleclose**: triggered each time the bubble is closed/hidden.
+* **infobubbledestroy**: triggered just before the bubble is removed from the dom.
+
+You can attach actions using the usual `bind` method on the target, the html elements that contain the bubble is available into the event's data.
+
+~~~~~~
+$('#target').bind('infobubbledisplay', function(event, bubble){
+	console.log(bubble);
+});
+~~~~~~
 
 # Build #
 
