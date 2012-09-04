@@ -66,16 +66,24 @@ $('#target').bind('infobubbledisplay', function(event, bubble){
 });
 ~~~~~~
 
-# Build #
+# Development #
 
-Requires node.js and npm.
+## Build ##
 
-Install grunt:
+Requires [node.js](http://nodejs.org) and [npm](https://npmjs.org/).
+
+Install [grunt](http://gruntjs.org):
 
 	npm install -g grunt
 
 Build the plugin:
 
 	grunt min:dist concat:dist
+
+## Tests ##
+
+The unit tests are made with [qunit](http://qunitjs.org/), you can either :
+* run the tests from the browser by openning the test files (no web server needed)
+* run the tests with grunt (it needs [phantomjs](http://phantomjs.org/) to be installed on your system): `grunt qunit`
 
 
