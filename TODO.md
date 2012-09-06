@@ -12,3 +12,5 @@ TODO List
 * Correct and refactor the positionning algo 
 * Enable to theme the bubbles in harmony with the jquery ui themes
 * Change the defaults arrow images
+* Add new cards top-left, top-middle,etc. for the arrow and the bubble
+
