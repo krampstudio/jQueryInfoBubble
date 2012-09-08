@@ -1,7 +1,7 @@
 {
     "name"          : "jqinfobubble",
     "description"   : "A jQuery plugin to display info bubbles",
-    "version"       : "0.1.0",
+    "version"       : "0.1.1",
     "homepage"      : "https://github.com/krampstudio/jQueryInfoBubble",
     "author": {
         "name"  : "Bertrand Chevrier",
@@ -17,7 +17,7 @@
         "url"  : "git://github.com/krampstudio/jQueryInfoBubble.git"
     },
     "dependencies": {
-        "jquery"   : ">= 1.7"
+        "jquery"   : ">=1.7"
     },
     "devDependencies": {
         "grunt" : "0.3.x",

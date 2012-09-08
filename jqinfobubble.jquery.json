@@ -2,7 +2,7 @@
     "name"          : "jqinfobubble",
     "title"         : "jQuery Info Bubble Plugin",
     "description"   : "A jQuery plugin to display tooltip / info bubbles",
-    "version"       : "0.1.0",
+    "version"       : "0.1.1",
     "homepage"      : "https://github.com/krampstudio/jQueryInfoBubble",
     "demo"          : "http://krampstudio.github.com/jQueryInfoBubble/index.html",
     "keywords"      : ["bubble", "tooltip", "info bubble"],
