@@ -78,7 +78,9 @@ Install [grunt](http://gruntjs.org):
 
 Build the plugin:
 
-	grunt min concat
+	git clone git@github.com:krampstudio/jQueryInfoBubble.git
+	cd jQueryInfoBubble
+	grunt
 
 ## Tests ##
 

@@ -2,12 +2,13 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: '<json:package.json>',
   		meta: {
-    		banner: '/**\n'+
+  			banner: '/**\n'+
+                    ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
 					' * <%= pkg.name %> - v<%= pkg.version %> \n' +
 					' * @author <%=pkg.author.name%> <<%=pkg.author.email%>>\n' +
-					' * @license <%=pkg.licenses[0].url%>\n'+
-      				' */'
-  		},
+					' * @license <%= _.pluck(pkg.licenses, "url").join(", ")\n'+
+                    ' */'
+		},
 		min : {
 			dist : {
 				src: 'src/jquery.infobubble.js',
@@ -24,4 +25,5 @@ module.exports = function(grunt){
 			all : ['test/*.html']
 		}
 	});
+	 grunt.registerTask('default', 'min concat');
 };
